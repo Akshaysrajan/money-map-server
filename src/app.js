@@ -4,8 +4,11 @@ const dbConnect = require("./config/dbConnect");
 // const {errorHandler, notFound } = require("./middleware/errorMiddleware");
 const User = require("./model/User");
 const { registerUser } = require("./controllers/users/usersCtrl");
-const userRoute = require("./routes/users/usersRoute");
+
 const { errorHandler, notFound } = require("./middlewares/errorMiddleware");
+const userRoute = require("./routes/users/usersRoute");
+const incomeRoute = require("./routes/income/incomeRoutes");
+const expenseRoute = require("./routes/expenses/expenseRoutes");
 
 const app = express();
 
@@ -18,9 +21,15 @@ dbConnect();
 //middlewares
 app.use(express.json());
 
-//routes
+//Users routes
 app.use("/api/users", userRoute);
 
+
+//income routes
+app.use("/api/income", incomeRoute);
+
+//expense routes
+app.use("/api/expenses", expenseRoute);
 
 //error handler
 app.use(notFound);
